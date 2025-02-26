@@ -63,6 +63,7 @@ const privateRoutes = [
     path: "/tin-nhan/:userId",
     component: Chat,
     allowedRoles: ["Customer", "Instructor"],
+    layout: null,
   },
 ];
 
