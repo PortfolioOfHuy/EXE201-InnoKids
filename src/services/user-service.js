@@ -1,48 +1,63 @@
 import axios from "./customize-axios";
 
-const handleSignUp = (data) => {
-  return axios.post(`/v1/api/register-account`, data);
-};
-
-const handleSignIn = (data) => {
-  return axios.post(`/v1/api/login`, data);
-};
-
-const handleVerifyEmail = (token) => {
-  return axios.post(`/v1/api/verify-email?token=${token}`);
-};
-
-const handleUserById = (id) => {
-  return axios.get(`/v1/api/get-user-by-Id?id=${id}`);
-};
-
-const handleUpdateProfile = (userId, fullName, phoneNumber) => {
-  return axios.post(`/v1/api/update-profile`, {
-    userId,
-    fullName,
-    phoneNumber,
+const postRegister = (userName, email, password, confirmPassword) => {
+  return axios.post(`/api/User/Register/register`, {
+    userName,
+    email,
+    password,
+    confirmPassword,
   });
 };
 
-const handleUserChangePassword = (
-  userId,
-  oldPassword,
-  newPassword,
-  confirmPassword
-) => {
-  return axios.post(`/v1/api/change-password`, {
-    userId,
+const getVerify = (email, otp) => {
+  return axios.get(
+    `/api/User/Verify/verify?email=${encodeURIComponent(
+      email
+    )}&otp=${encodeURIComponent(otp)}`
+  );
+};
+
+const postLogin = (loginInput, password) => {
+  return axios.post(`/api/User/Login/login`, { loginInput, password });
+};
+
+const getSendEmail = (email) => {
+  return axios.get(`/api/User/SendEmail?email=${encodeURIComponent(email)}`);
+};
+
+const getUserById = (id) => {
+  return axios.get(`/api/User/GetUserById?id=${encodeURIComponent(id)}`);
+};
+
+const postUpdateProfile = (id, username, email) => {
+  return axios.post(`/api/User/UpdateProfile`, { userId: id, username, email });
+};
+
+const postChangePassword = (id, oldPassword, newPassword, confirmPassword) => {
+  return axios.post(`/api/User/ChangePassword`, {
+    userId: id,
     oldPassword,
     newPassword,
     confirmPassword,
   });
 };
 
+const handleGetAllCourseByUser = (userId) => {
+  return axios.get(`/api/User/GetCourseByUserId?userId=${userId}`);
+};
+
+const handleGetPendingCourse = (userId) => {
+  return axios.get(`/UserViewPendingCourseTransaction?userId=${userId}`);
+};
+
 export {
-  handleSignUp,
-  handleSignIn,
-  handleVerifyEmail,
-  handleUserById,
-  handleUpdateProfile,
-  handleUserChangePassword,
+  postRegister,
+  getVerify,
+  postLogin,
+  getSendEmail,
+  getUserById,
+  postUpdateProfile,
+  postChangePassword,
+  handleGetAllCourseByUser,
+  handleGetPendingCourse,
 };

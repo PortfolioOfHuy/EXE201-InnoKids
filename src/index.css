@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: HTED;
+  src: url(/src/assets/HTEDAughris.otf);
+}
+
+@font-face {
+  font-family: HTH;
+  src: url(/src/assets/HTHeadspaceApercu-Regular.otf);
+}
+
+@layer components {
+  .custom-tabs .ant-tabs-nav::before {
+    @apply border-0;
+  }
+
+  .custom-tabs .ant-tabs-nav-list {
+    @apply bg-gray-100 p-1 rounded-lg;
+  }
+
+  .custom-tabs .ant-tabs-tab {
+    @apply m-0 rounded-lg;
+  }
+
+  .custom-tabs .ant-tabs-tab-active {
+    @apply bg-realWhite shadow-md;
+  }
+
+  .custom-tabs .ant-tabs-ink-bar {
+    @apply hidden;
+  }
+
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-6 md:py-8;
+  }
+
+  .full-bleed {
+    @apply -mt-6 w-full;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-10deg);
+  }
+  80% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 3s ease-in-out 1.5s infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+
+  .animate-wave {
+    animation: wave 2s ease-in-out infinite;
+  }
+}

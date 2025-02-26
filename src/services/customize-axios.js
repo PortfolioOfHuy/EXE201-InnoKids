@@ -1,21 +1,24 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://localhost:7186",
-  headers: { "Content-Type": "application/json" },
+  baseURL: "https://localhost:7282",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
-axios.interceptors.response.use(
+instance.interceptors.response.use(
   function (response) {
-    // Any status code that lies within the range of 2xx causes this function to trigger
-    // Do something with response data
+    // Trả về response như bình thường
     return response.data;
   },
   function (error) {
-    // Any status codes that fall outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    // You can also pass the error along to the calling code
-    return Promise.reject(error);
+    // Chỉ ném lỗi nếu status code là 500
+    if (error.response && error.response.status === 500) {
+      return Promise.reject(new Error(error.response.data?.message || "Internal Server Error"));
+    }
+    // Trả về response nếu lỗi không phải 500
+    return Promise.resolve(error.response?.data || error.message);
   }
 );
 
